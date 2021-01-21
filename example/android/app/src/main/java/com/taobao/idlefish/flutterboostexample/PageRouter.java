@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
 import com.idlefish.flutterboost.containers.BoostFlutterActivity;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class PageRouter {
         put("sample://flutterPage", "flutterPage");
     }};
 
+    public static final String PLATFORM_VIEW_PAGE_URL = "sample://platformViewPage";
     public static final String NATIVE_PAGE_URL = "sample://nativePage";
     public static final String FLUTTER_PAGE_URL = "sample://flutterPage";
     public static final String FLUTTER_FRAGMENT_PAGE_URL = "sample://flutterFragmentPage";
@@ -33,16 +35,16 @@ public class PageRouter {
 
         String path = url.split("\\?")[0];
 
-        Log.i("openPageByUrl",path);
+        Log.i("openPageByUrl", path);
 
         try {
             if (pageName.containsKey(path)) {
                 Intent intent = BoostFlutterActivity.withNewEngine().url(pageName.get(path)).params(params)
                         .backgroundMode(BoostFlutterActivity.BackgroundMode.opaque).build(context);
-                if(context instanceof Activity){
-                    Activity activity=(Activity)context;
-                    activity.startActivityForResult(intent,requestCode);
-                }else{
+                if (context instanceof Activity) {
+                    Activity activity = (Activity) context;
+                    activity.startActivityForResult(intent, requestCode);
+                } else {
                     context.startActivity(intent);
                 }
                 return true;
@@ -52,6 +54,8 @@ public class PageRouter {
             } else if (url.startsWith(NATIVE_PAGE_URL)) {
                 context.startActivity(new Intent(context, NativePageActivity.class));
                 return true;
+            } else if (url.startsWith(PLATFORM_VIEW_PAGE_URL)) {
+                context.startActivity(new Intent(context, FlutterPlatformViewActivity.class));
             }
 
             return false;

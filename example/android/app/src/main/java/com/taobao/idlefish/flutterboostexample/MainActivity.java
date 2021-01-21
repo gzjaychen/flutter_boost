@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static WeakReference<MainActivity> sRef;
 
+    private TextView mOpenPlatformViewPage;
     private TextView mOpenNative;
     private TextView mOpenFlutter;
     private TextView mOpenFlutterFragment;
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.native_page);
 
+        mOpenPlatformViewPage = findViewById(R.id.open_platform_view);
         mOpenNative = findViewById(R.id.open_native);
         mOpenFlutter = findViewById(R.id.open_flutter);
         mOpenFlutterFragment = findViewById(R.id.open_flutter_fragment);
 
+        mOpenPlatformViewPage.setOnClickListener(this);
         mOpenNative.setOnClickListener(this);
         mOpenFlutter.setOnClickListener(this);
         mOpenFlutterFragment.setOnClickListener(this);
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PageRouter.openPageByUrl(this, PageRouter.FLUTTER_PAGE_URL,params);
         } else if (v == mOpenFlutterFragment) {
             PageRouter.openPageByUrl(this, PageRouter.FLUTTER_FRAGMENT_PAGE_URL,params);
+        } else if (v == mOpenPlatformViewPage) {
+            PageRouter.openPageByUrl(this, PageRouter.PLATFORM_VIEW_PAGE_URL, params);
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.taobao.idlefish.flutterboostexample;
 
-import io.flutter.app.FlutterPluginRegistry;
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.StandardMessageCodec;
 
